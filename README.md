@@ -1,2 +1,3 @@
-# -4-
-Algorithms fourth edition notes
+# 算法（第4版）阅读笔记
+
+## 第一章 1.3 背包，队列和栈

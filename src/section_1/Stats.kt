@@ -3,27 +3,23 @@ package section_1
 import edu.princeton.cs.introcs.StdIn
 import edu.princeton.cs.introcs.StdOut
 
-class Stats {
-    companion object {
+fun main(args: Array<String>) {
 
-        @JvmStatic
-        fun main(args: Array<String>) {
-
-            val bag = Stats.MyBag<Double>()
-            while (!StdIn.isEmpty()) {
-                bag.add(StdIn.readDouble())
-            }
-            val size = bag.size();
-            var sum = bag.sum()
-            val mean = sum / size
-            sum = bag.sumByDouble { (it - mean) * (it - mean) }
-            val std = Math.sqrt(sum / (size - 1))
-            StdOut.printf("Mean: %.2f\n", mean)
-            StdOut.printf("Std dev: %.2f\n", std)
-        }
+    val bag = Stats.MyBag<Double>()
+    while (!StdIn.isEmpty()) {
+        bag.add(StdIn.readDouble())
     }
+    val size = bag.size();
+    var sum = bag.sum()
+    val mean = sum / size
+    sum = bag.sumByDouble { (it - mean) * (it - mean) }
+    val std = Math.sqrt(sum / (size - 1))
+    StdOut.printf("Mean: %.2f\n", mean)
+    StdOut.printf("Std dev: %.2f\n", std)
+}
 
-
+class Stats {
+    //背包的简单实现
     interface Bag<in T> {
         fun add(item: T)
 
