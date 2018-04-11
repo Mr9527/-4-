@@ -2,7 +2,6 @@ package section_1
 
 import edu.princeton.cs.introcs.StdIn
 import edu.princeton.cs.introcs.StdOut
-import sun.jvm.hotspot.utilities.UnsupportedPlatformException
 
 //用两个栈来实现一个简易计算器，计算器必须附带括号优先级
 fun main(args: Array<String>) {
@@ -22,8 +21,8 @@ fun main(args: Array<String>) {
                     "-" -> values.pop() - value
                     "*" -> values.pop() * value
                     "/" -> values.pop() / value
-                    "sqrt" -> Math.sqrt(value);
-                    else -> throw UnsupportedPlatformException()
+                    "sqrt" -> Math.sqrt(value)
+                    else -> throw NotImplementedError("not implement this compute")
                 }
                 values.push(v)
             }

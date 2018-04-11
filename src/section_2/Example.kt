@@ -4,7 +4,6 @@ import edu.princeton.cs.introcs.StdDraw
 import edu.princeton.cs.introcs.StdOut
 import edu.princeton.cs.introcs.StdRandom
 import java.awt.Color
-import java.math.BigDecimal
 
 abstract class Example {
 
@@ -18,7 +17,6 @@ abstract class Example {
         val t = a[i]
         a[i] = a[j]
         a[j] = t
-
     }
 
 
@@ -35,7 +33,7 @@ abstract class Example {
 
     fun show(a: Array<Double?>, paintColor: Color? = null, currentIndex: Int = -1) {
         StdDraw.clear()
-        a.forEachIndexed { i, item ->
+        a.forEachIndexed { i, _ ->
             val color = if (i == currentIndex) {
                 StdDraw.BOOK_RED
             } else paintColor ?: StdDraw.BLACK
@@ -100,6 +98,9 @@ abstract class Example {
         return (1 until a.size).none { less(a[it]!!, a[it - 1]!!) }
     }
 
+    /**
+     * 找到中间点，并确保左边的数比 J 小，右边的数比 J 大
+     */
     fun partition(a: Array<Double?>, lo: Int, hi: Int): Int {
         //将数组切分成a[lo..i-1,a[i],a[i+1..hi]]
         var i = lo
@@ -108,19 +109,22 @@ abstract class Example {
         while (true) {
             //扫描左右交换元素
             while (less(a[++i], v)) {
+                //可以打乱数组的时候找到一个最大值放置在最后边当作哨兵，这样就不需要右边的边界检查
                 if (i == hi) break
             }
             while (less(v, a[--j])) {
-                if (j == lo) break
             }
             if (i >= j) break
             exch(a, i, j)
+            betterShow(a, j, i)
         }
         exch(a, lo, j)
+        betterShow(a, j, lo)
+
         return j
     }
 
-    fun testArray(size: Int): Array<Double?> {
+    fun testArray(size: Int = 100): Array<Double?> {
         val a = arrayOfNulls<Double>(size)
         for (i in a.indices) {
             a[i] = StdRandom.uniform()

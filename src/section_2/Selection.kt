@@ -9,9 +9,23 @@ import edu.princeton.cs.introcs.StdRandom
  *  - 对于长度为 N 的数组，选择排序大约需要 N^2/2 次比较和 N 次交换
  *  - 运行时间和输入无关
  *  - 数据移动是最少的
+ *
+ *
  */
 class Selection : Example() {
 
+    /**
+     *
+     *  for (i=0;i<n;i++){
+     *     int min =i
+     *     for(j=i+1;j<n;j++){
+     *        if(less(j,min)){
+     *           min =j
+     *          }
+     *      exch(....)
+     *     }
+     *  }
+     */
     override fun sort(array: Array<Double?>) {
         show(array)
         val n = array.size
