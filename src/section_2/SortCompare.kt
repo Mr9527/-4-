@@ -1,37 +1,35 @@
 package section_2
 
-import edu.princeton.cs.introcs.StdDraw
 import edu.princeton.cs.introcs.StdOut
 import edu.princeton.cs.introcs.StdRandom
 import edu.princeton.cs.introcs.Stopwatch
-import java.awt.Color
 
 class SortCompare {
 
     companion object {
-        fun time(alg: String, a: Array<Double?>): Double {
+        private fun time(alg: String, a: Array<Double>): Double {
             val timer = Stopwatch()
             when (alg) {
                 "Selection" -> {
-                    Selection().sort(a)
+                  Selection.sort(a)
                 }
                 "Insertion" -> {
-                    Insertion().sort(a)
+                    Insertion.sort(a)
                 }
                 "Shell" -> {
-                    Shell().sort(a)
+                    Shell.sort(a)
                 }
                 "Quick" -> {
-                    Quick().sort(a)
+                    Quick.sort(a)
                 }
                 "Heap" -> {
-                    Heap().sort(a)
+                    Heap.sort(a)
                 }
                 "Merge" -> {
-                    Merge().sort(a)
+                    Merge.sort(a)
                 }
                 "MergeBU" -> {
-                    MergeBU().sort(a)
+                    MergeBU.sort(a)
                 }
                 else -> NotImplementedError("not implement $alg")
             }
@@ -40,12 +38,12 @@ class SortCompare {
 
         fun timeRandomInput(alg: String, N: Int, T: Int): Double {
             var total = 0.0
-            val a = arrayOfNulls<Double>(N)
+            val a = uniformArray(N)
             for (t in 0 until T) {
                 for (i in 0 until N) {
                     a[i] = StdRandom.uniform()
                 }
-                total += time(alg, a);
+                total += time(alg, a)
             }
             return total
         }
@@ -56,6 +54,8 @@ class SortCompare {
             StdOut.printf("For %d random Doubles\n %s is ", n, sort1)
             StdOut.printf("%.1f times faster than %s\n", time2 / time1, sort2)
         }
+
+        fun uniformArray(size: Int = 100) = Array(size, { StdRandom.uniform() })
 
         @JvmStatic
         fun main(array: Array<String>) {

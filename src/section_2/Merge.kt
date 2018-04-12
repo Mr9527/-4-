@@ -16,28 +16,63 @@ import edu.princeton.cs.introcs.StdDraw
  *
  * {@link MergeBu} 自低向上排序
  */
-class Merge : Example() {
+class Merge {
 
-    override fun sort(a: Array<Double?>) {
-        val aux: Array<Double?> = arrayOfNulls(a.size)
-        show(a)
-        sort(a, aux, 0, a.size - 1)
-        show(a, StdDraw.GREEN)
-    }
-
-    private fun sort(array: Array<Double?>, copyArray: Array<Double?>, lo: Int, hi: Int) {
-        if (hi <= lo) return
-        val mid = lo + (hi - lo) / 2
-        sort(array, copyArray, lo, mid)
-        sort(array, copyArray, mid + 1, hi)
-        merge(array, copyArray, lo, mid, hi)
-    }
 
     companion object {
+
+        fun sort(a: Array<Double>) {
+            val aux: Array<Double?> = arrayOfNulls(a.size)
+            a.show()
+            sort(a, aux, 0, a.size - 1)
+            a.show(StdDraw.GREEN)
+        }
+
+        private fun sort(array: Array<Double>, copyArray: Array<Double?>, lo: Int, hi: Int) {
+            if (hi <= lo) return
+            val mid = lo + (hi - lo) / 2
+            sort(array, copyArray, lo, mid)
+            sort(array, copyArray, mid + 1, hi)
+            merge(array, copyArray, lo, mid, hi)
+        }
+
+        private fun merge(a: Array<Double>, aux: Array<Double?>, lo: Int, mid: Int, hi: Int) {
+            var i = lo
+            var j = mid + 1
+            var changedIndex: Int
+            for (k in lo..hi) {
+                aux[k] = a[k]
+            }
+            for (k in lo..hi) {
+                a[k] = when {
+                //左半边用尽
+                    i > mid -> {
+                        changedIndex = j
+                        aux[j++]!!
+                    }
+                //右半边用尽
+                    j > hi -> {
+                        changedIndex = i
+                        aux[i++]!!
+                    }
+                //右半边的当前元素小于左半边的元素，取右半边的元素
+                    less(aux[j]!!, aux[i]!!) -> {
+                        changedIndex = j
+                        aux[j++]!!
+                    }
+                //右半边的当前元素大于左半边元素，取左半边元素
+                    else -> {
+                        changedIndex = i
+                        aux[i++]!!
+                    }
+                }
+                a.betterShow(changedIndex, k)
+            }
+        }
+
         @JvmStatic
         fun main(array: Array<String>) {
-            val merge = Merge()
-            merge.sort(merge.testArray(10))
+            Merge.sort(SortCompare.uniformArray())
         }
     }
 

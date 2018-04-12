@@ -57,72 +57,13 @@ abstract class Example {
     }
 
     /**
-     * 原地归并
-     *
+     * 数组是否有序
      */
-    fun merge(a: Array<Double?>, aux: Array<Double?>, lo: Int, mid: Int, hi: Int) {
-        var i = lo
-        var j = mid + 1
-        var changedIndex: Int
-        for (k in lo..hi) {
-            aux[k] = a[k]
-        }
-        for (k in lo..hi) {
-            a[k] = when {
-            //左半边用尽
-                i > mid -> {
-                    changedIndex = j
-                    aux[j++]
-                }
-            //右半边用尽
-                j > hi -> {
-                    changedIndex = i
-                    aux[i++]
-                }
-            //右半边的当前元素小于左半边的元素，取右半边的元素
-                less(aux[j], aux[i]) -> {
-                    changedIndex = j
-                    aux[j++]
-                }
-            //右半边的当前元素大于左半边元素，取左半边元素
-                else -> {
-                    changedIndex = i
-                    aux[i++]
-                }
-            }
-            betterShow(a, changedIndex, k)
-        }
-    }
-
     fun isSorted(a: Array<Double?>): Boolean {
         return (1 until a.size).none { less(a[it]!!, a[it - 1]!!) }
     }
 
-    /**
-     * 找到中间点，并确保左边的数比 J 小，右边的数比 J 大
-     */
-    fun partition(a: Array<Double?>, lo: Int, hi: Int): Int {
-        //将数组切分成a[lo..i-1,a[i],a[i+1..hi]]
-        var i = lo
-        var j = hi + 1
-        val v = a[lo]
-        while (true) {
-            //扫描左右交换元素
-            while (less(a[++i], v)) {
-                //可以打乱数组的时候找到一个最大值放置在最后边当作哨兵，这样就不需要右边的边界检查
-                if (i == hi) break
-            }
-            while (less(v, a[--j])) {
-            }
-            if (i >= j) break
-            exch(a, i, j)
-            betterShow(a, j, i)
-        }
-        exch(a, lo, j)
-        betterShow(a, j, lo)
 
-        return j
-    }
 
     fun testArray(size: Int = 100): Array<Double?> {
         val a = arrayOfNulls<Double>(size)
@@ -140,7 +81,6 @@ abstract class Example {
     }
 
     companion object {
-
         @JvmStatic
         fun main(array: Array<String>) {
 
