@@ -3,6 +3,7 @@ package section_2
 import edu.princeton.cs.introcs.StdOut
 import edu.princeton.cs.introcs.StdRandom
 import edu.princeton.cs.introcs.Stopwatch
+import tree.Heap
 
 class SortCompare {
 
@@ -11,7 +12,7 @@ class SortCompare {
             val timer = Stopwatch()
             when (alg) {
                 "Selection" -> {
-                  Selection.sort(a)
+                    Selection.sort(a)
                 }
                 "Insertion" -> {
                     Insertion.sort(a)
@@ -36,7 +37,7 @@ class SortCompare {
             return timer.elapsedTime()
         }
 
-        fun timeRandomInput(alg: String, N: Int, T: Int): Double {
+        private fun timeRandomInput(alg: String, N: Int, T: Int): Double {
             var total = 0.0
             val a = uniformArray(N)
             for (t in 0 until T) {
@@ -48,6 +49,16 @@ class SortCompare {
             return total
         }
 
+        fun printArray(array: Array<*>) {
+            println("---------------------")
+            for (any in array) {
+                print(any)
+                print("  ")
+            }
+            println()
+            println("---------------------")
+        }
+
         fun match(sort1: String, sort2: String, n: Int, t: Int) {
             val time1 = timeRandomInput(sort1, n, t)
             val time2 = timeRandomInput(sort2, n, t)
@@ -55,7 +66,8 @@ class SortCompare {
             StdOut.printf("%.1f times faster than %s\n", time2 / time1, sort2)
         }
 
-        fun uniformArray(size: Int = 100) = Array(size, { StdRandom.uniform() })
+        fun uniformArray(size: Int = 100) = Array(size) { StdRandom.uniform() }
+        fun sameArray(size: Int = 100) = Array(size) { StdRandom.uniform() }
 
         @JvmStatic
         fun main(array: Array<String>) {

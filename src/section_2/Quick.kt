@@ -60,7 +60,7 @@ class Quick {
         @JvmStatic
         fun main(str: Array<String>) {
 //            SortCompare.match("Quick", "MergeBU", 50, 2)
-            Quick.sort(arrayOf(11.0, 18.0, 1.0, 20.0, 5.0, 12.0, 5.0, 16.0, 21.0, 9.0, 14.0, 17.0, 3.0, 24.0, 15.0, 19.0))
+            Quick.sort(SortCompare.sameArray(2000))
         }
     }
 }

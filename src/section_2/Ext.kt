@@ -3,6 +3,7 @@ package section_2
 import edu.princeton.cs.introcs.StdDraw
 import edu.princeton.cs.introcs.StdOut
 import java.awt.Color
+import java.util.*
 
 /**
  * @author chenzhaojun
@@ -15,6 +16,7 @@ fun <T : Comparable<T>> Array<T>.isSorted(): Boolean {
 }
 
 fun Array<Double>.show(paintColor: Color? = null, currentIndex: Int = -1) {
+    println(Date())
     StdDraw.clear()
     this.forEachIndexed { i, _ ->
         val color = if (i == currentIndex) {

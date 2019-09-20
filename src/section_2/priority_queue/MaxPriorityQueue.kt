@@ -34,7 +34,7 @@ class MaxPriorityQueue<T : Comparable<T>>(initSize: Int = 0) {
         return max!!
     }
 
-    fun isEmpnty() = index == 0
+    fun isEmpty() = index == 0
 
     fun size() = index
 
