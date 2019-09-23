@@ -1,8 +1,8 @@
 package graph
 
 import java.util.*
-import kotlin.collections.HashMap
-import kotlin.reflect.jvm.internal.pcollections.HashPMap
+import java.util.HashMap
+
 
 fun main(args: Array<String>) {
     val a = LinkedList<String>()
@@ -47,8 +47,8 @@ fun main(args: Array<String>) {
     graph["D"] = d
     graph["E"] = e
     graph["F"] = f
-    graph["G"] = h
-    graph["H"] = g
+    graph["G"] = g
+    graph["H"] = h
 
     graph.forEach { (tag, list) ->
         println()
@@ -59,11 +59,17 @@ fun main(args: Array<String>) {
     }
     // 记录每个顶点
     val dist = HashMap<String, Int>()
-    val start = "H"
+    val visited = "H"
     println()
-    println("get the shortest distance  from all the points to point $start")
-    bfs(graph, dist, start)
+    println("get the shortest distance  from all the points to point $visited")
+    bfs(graph, dist, visited)
     println("搜索完毕")
+    println("____________")
+    println("search the path between two points  through BFS")
+    val startVisited = "A"
+    val endVisited = "E"
+    println("point $startVisited to point $endVisited, path: ")
+    bfs(graph, startVisited, endVisited)
 }
 
 
@@ -71,18 +77,18 @@ fun main(args: Array<String>) {
  * Breadth First Search (广度优先遍历)
  * 其主要思想是从起点开始，将其临近的所有顶点都加到一个队列中去，然后标记下这些顶点的距离为1.最后将起始顶点标记为已访问，今后就不
  * 会再访问。然后再从队列取出最先进队的顶点A,同时也取出其周边临近节点。加入队列末尾，将这些顶点的距离相对 A 再+1，最后离开这个顶
- * 点 A
+ * 点 A.依次下去，直到队列为空为止。
  */
-fun bfs(graph: HashMap<String, LinkedList<String>>, dist: HashMap<String, Int>, startVisited: String) {
+fun bfs(graph: HashMap<String, LinkedList<String>>, dist: HashMap<String, Int>, visited: String) {
 
     val queue: Queue<String> = LinkedList()
-    queue.add(startVisited)
-    dist[startVisited] = 0
+    queue.add(visited)
+    dist[visited] = 0
     var i = 0
     while (!queue.isEmpty()) {
         val top = queue.poll()
         i++
-        println("The $i th element $top shortest distance from $startVisited is ${dist[top]} ")
+        println("The $i th element $top shortest distance from $visited is ${dist[top]} ")
         // 得出其周边还未被访问的顶点的距离
         val d = dist[top]!! + 1
         graph[top]!!.forEach {
@@ -93,4 +99,46 @@ fun bfs(graph: HashMap<String, LinkedList<String>>, dist: HashMap<String, Int>, 
             }
         }
     }
+}
+
+/**
+ * 利用广度搜索一条从起点到终点的路径
+ */
+fun bfs(graph: HashMap<String, LinkedList<String>>, startVisited: String, endVisited: String) {
+    if (startVisited == endVisited) {
+        return
+    }
+    val vertexCount = graph.size
+    val visited = HashMap<String, Boolean>(vertexCount)
+    val queue: Queue<String> = LinkedList()
+    queue.add(startVisited)
+    val prev = HashMap<String, String>(vertexCount)
+    graph.forEach { (tag, _) ->
+        prev[tag] = ""
+        visited[tag] = false
+    }
+    while (queue.size != 0) {
+        val tag = queue.poll()
+        val list = graph[tag]
+        list!!.forEach {
+            // 如果这个顶点没有被访问过
+            if (!visited[it]!!) {
+                prev[it] = tag
+                if (it == endVisited) {
+                    output(prev, startVisited, endVisited)
+                    return
+                }
+                visited[it] = true
+                queue.add(it)
+            }
+        }
+    }
+}
+
+
+private fun output(prev: HashMap<String, String>, startVisited: String, endVisited: String) {
+    if (prev[endVisited] != "" && endVisited != startVisited) {
+        output(prev, startVisited, prev[endVisited]!!)
+    }
+    print(endVisited)
 }
