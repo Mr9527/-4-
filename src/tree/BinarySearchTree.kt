@@ -1,8 +1,5 @@
 package tree
 
-import section_1.Node
-import sun.reflect.generics.tree.Tree
-
 class BinarySearchTree<T : Comparable<T>> {
     private var tree: TreeNode<T>? = null
 

@@ -1,6 +1,4 @@
-package tree
-
-import algorithm_4.section_2.*
+package algorithm_4.section_2
 
 /**
  * @author chenzhaojun
@@ -30,7 +28,6 @@ class HeapZero {
             a.printArray()
         }
 
-
         private fun sink(array: Array<Double>, k: Int, len: Int) {
             val tmp: Double = array[k]
             var j: Int = 2 * k
@@ -53,7 +50,7 @@ class HeapZero {
 
         @JvmStatic
         fun main(array: Array<String>) {
-            sort(SortCompare.uniformArray(500))
+            HeapZero.sort(SortCompare.uniformArray())
         }
     }
 }

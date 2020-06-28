@@ -1,11 +1,9 @@
-package tree
+package algorithm_4.section_2
 
 import edu.princeton.cs.introcs.StdRandom
-import algorithm_4.section_2.*
 
 /**
  * 堆排序 下标从 1 开始
- *
  */
 class Heap {
 
@@ -57,7 +55,7 @@ class Heap {
 
         @JvmStatic
         fun main(array: Array<String>) {
-            sort(Array(500, { it -> if (it == 0) 0.0 else StdRandom.uniform() }))
+            Heap.sort(Array(500, { it -> if (it == 0) 0.0 else StdRandom.uniform() }))
         }
     }
 
