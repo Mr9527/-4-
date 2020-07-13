@@ -3,7 +3,6 @@ package algorithm_4.section_2
 import edu.princeton.cs.introcs.StdOut
 import edu.princeton.cs.introcs.StdRandom
 import edu.princeton.cs.introcs.Stopwatch
-import tree.Heap
 
 class SortCompare {
 
