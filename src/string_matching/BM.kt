@@ -1,10 +1,12 @@
 package string_matching
 
+import edu.princeton.cs.introcs.StdDraw
+import java.awt.Color
 import kotlin.math.max
 
 /*
 * BM 全称 Boyer-Moore 算法，它是一种非常高效的字符串匹配算法。
-* BM 算法思路：我们把模式串和主串的匹配过程，看作模式串在主串中不停的向后滑动。当遇到不匹配的算法的时候，BF 算法和 RK 是将模式串向后滑动以为，
+* BM 算法思路：我们把模式串和主串的匹配过程，看作模式串在主串中不停的向后滑动。当遇到不匹配的算法的时候，BF 算法和 RK 是将模式串向后滑动一位，
 * 然后从模式串的第一个字符串开始重新匹配。
  */
 fun bm(main: String, match: String): Int {
@@ -36,6 +38,8 @@ fun bm(main: String, match: String): Int {
             y = moveByGs(j, match, suffix, prefix)
         }
         i += max(x, y)
+        StdDraw.text(i * 1.0 / main.length + 0.01, 0.75, "▲");
+        StdDraw.text(i * 1.0 / main.length + 0.01, 0.70, """${max(x, y)}""");
     }
     return -1
 }
@@ -89,6 +93,13 @@ fun generateGS(match: String, suffix: Array<Int?>, prefix: Array<Boolean?>) {
 }
 
 fun main() {
-    val bm = bm("abcsdfsoighwasdbvcfsdfssabavvvababdsfsdzxcdfeoizdsdfabvjvzijewdsafjabvnawjtgsdfdnfgfxcvqxnvijjew", "bvna")
+    val main = "abcsdfsoighwasdbvcfsdfssabavvvababdsfsdzxw"
+    StdDraw.setPenColor(Color.BLACK)
+    val mainArray = main.toCharArray()
+    mainArray.forEachIndexed { i, c ->
+        StdDraw.text(i * 1.0 / mainArray.size + 0.01, 0.8, c.toString())
+    }
+    val bm =
+        bm(main, "ssab")
     println(bm)
 }
