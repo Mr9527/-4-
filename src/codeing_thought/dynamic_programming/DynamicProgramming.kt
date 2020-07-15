@@ -1,6 +1,4 @@
-package dynamic_programming
-
-import org.omg.CORBA.INTERNAL
+package codeing_thought.dynamic_programming
 
 
 fun knapsack(widget: IntArray, n: Int, w: Int): Int {

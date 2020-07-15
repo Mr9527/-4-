@@ -1,6 +1,4 @@
-package divide_and_conquer
-
-import kotlin.random.Random
+package codeing_thought.divide_and_conquer
 
 
 var num = 0
