@@ -47,9 +47,9 @@ fun printlnQueens(result: Array<Int?>, count: () -> Int) {
     for (row in 0 until 8) {
         for (column in 0 until 8) {
             if (result[row] == column) {
-                print("▲")
+                print("▲ ")
             } else {
-                print("■")
+                print("■ ")
             }
         }
         println()
