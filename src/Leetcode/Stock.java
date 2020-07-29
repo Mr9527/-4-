@@ -1,6 +1,8 @@
 package Leetcode;
 
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.PriorityQueue;
 import java.util.Stack;
 
 public class Stock {
@@ -100,13 +102,15 @@ public class Stock {
      * 统计所有的峰谷然后加起来
      */
     public int maxProfitⅡ1(int[] prices) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        queue.poll();
         int i = 0;
         int maxProfit = 0;
         int peak = prices[0];
         int valley = prices[0];
 
         while (i < prices.length - 1) {
-            while (i < prices.length - 1 && prices[i] < prices[i + 1]) {
+            while (i < prices.length - 1 && prices[i] >= prices[i + 1]) {
                 i++;
                 valley = prices[i];
             }
@@ -134,9 +138,38 @@ public class Stock {
         return maxprofit;
     }
 
+    public int maxProfitⅢ(int[] prices) {
+        if (prices.length == 0) return 0;
+        int minBuy = prices[0];
+        int maxProfit = 0;
+        int maxi = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < minBuy) {
+                minBuy = prices[i];
+                maxi = i;
+            } else if (prices[i] - minBuy > maxProfit) {
+                maxProfit = prices[i] - minBuy;
+            }
+        }
+        if (maxi < prices.length - 2) {
+            int min1 = prices[maxi + 1];
+            int profit2 = 0;
+            for (int i = maxi + 1; i < prices.length; i++) {
+                if (prices[i] < min1) {
+                    min1 = prices[i];
+                } else if (prices[i] - minBuy > maxProfit) {
+                    profit2 = prices[i] - min1;
+                }
+            }
+            return profit2 + maxProfit;
+        }
+        return maxProfit;
+    }
+
     public static void main(String[] args) {
         Stock stock = new Stock();
         int i = stock.maxProfit(new int[]{7, 1, 5, 3, 6, 4});
         System.out.println(i);
+        System.out.println(stock.maxProfitⅢ(new int[]{1, 2, 4, 2, 5, 7, 2, 4, 9, 0}));
     }
 }
