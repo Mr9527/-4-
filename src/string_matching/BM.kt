@@ -38,6 +38,7 @@ fun bm(main: String, match: String): Int {
             y = moveByGs(j, match, suffix, prefix)
         }
         i += max(x, y)
+        Thread.sleep(1000);
         StdDraw.text(i * 1.0 / main.length + 0.01, 0.75, "▲");
         StdDraw.text(i * 1.0 / main.length + 0.01, 0.70, """${max(x, y)}""");
     }
