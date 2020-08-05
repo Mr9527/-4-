@@ -1,6 +1,7 @@
 package Leetcode;
 
 import java.util.Arrays;
+import java.util.Date;
 
 public class Coin {
 
@@ -18,9 +19,47 @@ public class Coin {
             for (int coin : coins) {
                 if (i - coin < 0) continue;
                 dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                System.out.print(dp[i]+" | ");
             }
+            System.out.println();
         }
         return (dp[amount] == amount + 1) ? -1 : dp[amount];
+    }
+
+    /**
+     * 322. 零钱兑换，回溯实现（超时）
+     */
+    public int minCoinArrayToBacktrack(int[] coins, int amount) {
+        return minCoinArrayToBacktrack(0, coins, amount, new int[coins.length + 1][amount + 1]);
+    }
+
+    private int minCoinArrayToBacktrack(int idxCoin, int[] coins, int amount, int[][] ints) {
+        if (amount == 0) {
+            return 0;
+        }
+        if (idxCoin < coins.length && amount > 0) {
+            // 获取当前金币和剩余乘积的系数
+            int maxVal = amount / coins[idxCoin];
+            int minCost = Integer.MAX_VALUE;
+            for (int i = 0; i <= maxVal; i++) {
+                if (amount >= i * coins[idxCoin]) {
+                    int cCoin = idxCoin + 1;
+                    int a = amount - i * coins[idxCoin];
+                    int res;
+                    if (ints[cCoin][a] != 0) {
+                        res = ints[cCoin][a];
+                    } else {
+                        res = minCoinArrayToBacktrack(cCoin, coins, a, ints);
+                        ints[cCoin][a] = res;
+                    }
+                    if (res != -1) {
+                        minCost = Math.min(minCost, res + i);
+                    }
+                }
+            }
+            return minCost == Integer.MAX_VALUE ? -1 : minCost;
+        }
+        return -1;
     }
 
     /**
@@ -38,5 +77,16 @@ public class Coin {
             }
         }
         return dp[amount];
+    }
+
+
+    public static void main(String[] args) {
+        Coin coin = new Coin();
+//        System.out.println("start:" + new Date(System.currentTimeMillis()));
+//        int i = coin.minCoinArrayToBacktrack(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}, 100);
+//        System.out.println(i);
+//        System.out.println("end:" + new Date(System.currentTimeMillis()));
+        coin.minCoinArray(new int[]{1, 2, 5}, 11);
+
     }
 }
