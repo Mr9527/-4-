@@ -19,9 +19,8 @@ public class Coin {
             for (int coin : coins) {
                 if (i - coin < 0) continue;
                 dp[i] = Math.min(dp[i], dp[i - coin] + 1);
-                System.out.print(dp[i]+" | ");
+                System.out.print(dp[i]);
             }
-            System.out.println();
         }
         return (dp[amount] == amount + 1) ? -1 : dp[amount];
     }
