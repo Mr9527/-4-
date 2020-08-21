@@ -2,7 +2,7 @@ package linkedList
 
 import backtracking.result
 
-fun main() {
+fun main(args: Array<String>) {
     var node: LinkedNode<Int> = LinkedNode(0, null)
     var tmp: LinkedNode<Int> = node
     for (i in 1..10) {

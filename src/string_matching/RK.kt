@@ -51,7 +51,7 @@ fun String.easyHash(): Int {
 }
 
 
-fun main() {
+fun main(args: Array<String>) {
     val main = "acadbedbabcdbec"
     rk(main,"bec")
 }

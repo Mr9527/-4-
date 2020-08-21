@@ -1,6 +1,6 @@
 package linkedList
 
-fun main() {
+fun main(args: Array<String>) {
 
     val node: LinkedNode<Int> = LinkedNode(0, null)
     var tmp: LinkedNode<Int> = node

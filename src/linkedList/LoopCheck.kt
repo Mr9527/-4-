@@ -5,7 +5,7 @@ import graph.bfs
 import kotlin.test.assertEquals
 
 
-fun main() {
+fun main(args: Array<String>) {
     val n6 = LinkedNode("A", null)
     val n5 = LinkedNode("A", n6)
     val n4 = LinkedNode("B", n5)

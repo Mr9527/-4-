@@ -93,7 +93,7 @@ fun generateGS(match: String, suffix: Array<Int?>, prefix: Array<Boolean?>) {
     }
 }
 
-fun main() {
+fun main(args: Array<String>) {
     val main = "abcsdfsoighwasdbvcfsdfssabavvvababdsfsdzxw"
     StdDraw.setPenColor(Color.BLACK)
     val mainArray = main.toCharArray()

@@ -56,7 +56,7 @@ fun printArray(array: Array<Array<Boolean>>) {
     println()
 }
 
-fun main() {
+fun main(args: Array<String>) {
     val array = intArrayOf(2, 2, 4, 6, 3)
     knapsack(array, array.size, 10)
     println()

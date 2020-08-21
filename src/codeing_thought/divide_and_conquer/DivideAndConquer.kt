@@ -47,7 +47,7 @@ fun merge(array: IntArray, startIndex: Int, mid: Int, endIndex: Int) {
     }
 }
 
-fun main() {
+fun main(args: Array<String>) {
     count(intArrayOf(2, 4, 3, 1, 5, 6))
     println(num)
 }

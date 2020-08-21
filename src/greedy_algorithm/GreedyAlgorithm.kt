@@ -44,6 +44,6 @@ fun distributionBackpack() {
 }
 
 
-fun main() {
+fun main(args: Array<String>) {
     distributionBackpack()
 }

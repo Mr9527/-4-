@@ -2,7 +2,7 @@ package Leetcode
 
 import kotlin.test.assertEquals
 
-fun main() {
+fun main(args: Array<String>) {
     assertEquals(check("AaBBAA"), false, "error")
     assertEquals(check("AABBAA"), true, "error")
 

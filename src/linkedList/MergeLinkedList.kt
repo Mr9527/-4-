@@ -1,6 +1,6 @@
 package linkedList
 
-fun main() {
+fun main(args: Array<String>) {
 
     val merge = merge(createNote(), createNote1())
     merge.print()

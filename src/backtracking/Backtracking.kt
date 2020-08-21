@@ -58,7 +58,7 @@ fun printlnQueens(result: Array<Int?>, count: () -> Int) {
     println()
 }
 
-fun main() {
+fun main(args: Array<String>) {
     val count = counter()
     cal8Queens(0, count)
     println(count())

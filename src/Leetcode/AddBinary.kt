@@ -5,11 +5,6 @@ import kotlin.math.max
 import kotlin.test.assertEquals
 
 
-fun main() {
-    print(addBinary("0", "0"))
-//    assertEquals(addBinary("111", "1"), "100")
-//    assertEquals(addBinary("1010", "1011"), "10101")
-}
 
 fun addBinary(a: String, b: String): String {
     var result = StringBuilder();
